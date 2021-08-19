@@ -1,0 +1,79 @@
+This is a set of client & server programs implemented using the UDP protocol.
+
+Here's a rought guide:
+
+* udp-1
+  Example showing how to use inet_ntop
+
+* udp-2-client.c & udp-2-server.c
+
+  udp-2-client addr port
+  client reads input, sends terminal input to specified network address and port
+  Uses an ephemeral port on client side.
+
+  udp-2-server addr port
+  server starts up at specified addr & port, prints out received messages
+
+* udp-3-client.c & udp-3-server.c
+
+  udp-3-client addr port
+  client reads input, sends terminal input to specified network address and port.
+  server will return it, client will print it out again
+  Uses an ephemeral port on client side.
+
+  udp-3-server addr port
+  server starts up at specified addr & port, prints out received messages,
+  returns it
+
+* udp-4-client.c -- used with udp-3-server
+  
+  udp-4-client addr port
+  a version of udp-3-client that uses 'connect' to connect the socket to the
+  server address. This allows use of read/write interfaces
+  Uses an ephemeral port on client side.
+
+* udp-5-client.c -- used with udp-3-server
+
+  udp-7-client dest-net dest-port src-net src-port
+  extend udp-4-client with 'bind' to specify a specific origination port.
+  
+* udp-6-client.c -- used with udp-3-server
+
+  udp-7-client dest-net dest-port src-net src-port
+  extend udp-5-client with port options that allow us to use port
+  numbers across different interfaces (SO_REUSEADDR). This allows
+  e.g. one socket for 127.0.0.1:80 and one for eth0:80 or for
+  multicast addresses
+
+* udp-7-client.c -- used with udp-3-server
+
+  udp-7-client dest-net dest-port src-net src-port
+  Like udp-7-client, but also enables broadcast packets (if address specified)
+
+* udp-8-client.c
+  udp-8-server.c
+
+  udp=8-client addr port
+  Sends the send and receive buffer size. Used to increase/reduce buffer size,
+  which can speed up some code. Server does same thing.
+
+* udp-relay.c
+  
+  udp-relay inputPort destNet destPort [ dropProb ]
+  This program sits between a 'client' and 'server' (e.g. udp-3-client and dp-4-server).
+  It 'relays' (copies) packets from the client to the server and optionally
+  dropping the packet with a specified probability. This can be used to test a
+  "stop and repeat" protocol or other protocols used to implement ACK or reliable
+  delivery.
+
+  For example, if we start the server:
+     udp-3-server 0.0.0.0 10000 &
+  and then start the relay as
+     udp-relay 9000 127.0.0.1 10000 &
+  then running the client as
+     udp-3-client 127.0.0.1 9000
+  will cause packets to go from 'client' to 'server' as before, but stopping by the relay.
+  If you specify
+     udp-relay 9000 127.0.0.1 10000 0.40
+  instead, 40% of the packets will be dropped
+  
