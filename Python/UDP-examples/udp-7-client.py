@@ -7,7 +7,9 @@ import sys,os
 
 
 ##
-## Allow broadcast
+## It is possible to "broadcast" to a network broadcast address.
+## (e.g. 192.168.1.255) but doing so requires yet another socket
+## option SO_BROADCAST to allow the use of broadcast addresses.
 ##
 
 

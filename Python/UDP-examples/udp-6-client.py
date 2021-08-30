@@ -7,7 +7,12 @@ import sys,os
 
 
 ##
-## Extend UDP-4 with bind, which sets a specific interface
+## Extend UDP-4 with bind, which sets a specific interface.
+##
+## You may want to have multiple UDP clients send packets using
+## the same client UDP port. This can can be done using the
+## SO_REUSEPORT socket option ( https://lwn.net/Articles/542629/ ).
+## This example shows how that can be done in Python.
 ##
 
 

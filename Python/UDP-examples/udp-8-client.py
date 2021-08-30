@@ -7,7 +7,7 @@ import sys,os
 
 
 ##
-## An example that sets the send and receive buffer sizes
+## An example that sets the send and receive buffer sizes for a given socket.
 ##
 
 
