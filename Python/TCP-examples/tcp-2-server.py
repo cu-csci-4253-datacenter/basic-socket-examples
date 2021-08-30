@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 ##
 ## Corresponds to tcp-2-server.c
 ##
@@ -7,7 +7,7 @@ import sys,os
 
 
 ##
-## Sample TCP server - receive message, return it to client.
+## Sample TCP server - receive message, then return it to client.
 ## Pair with tcp-2-client.c. Only difference is in handle_client
 ##
 

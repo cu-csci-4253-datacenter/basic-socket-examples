@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 ##
 ## Corresponds to tcp-1-server.c
 ##
@@ -7,8 +7,8 @@ import sys,os
 
 
 ##
-## Sample UDP server - receive message, return it to client
-## Pair with udp-3-server.c
+## Sample TCP server - receives messages from a client program
+## but does not send data to the client.
 ##
 
 if len(sys.argv) < 3:
@@ -32,10 +32,10 @@ def print_socket_endpoints(name, sockfd):
 def handle_client(sockfd):
     while True:
         line = acceptfd.recv(8192)
-        if line == '':
+        if len(line) == 0:
             print("End of input, exit")
             break
-        print("%s: received %s" % (me, line))
+        print("%s: received %s" % (me, line.decode('utf-8')))
     
 
 ##

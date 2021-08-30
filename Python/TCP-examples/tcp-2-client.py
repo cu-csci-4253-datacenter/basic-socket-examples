@@ -38,8 +38,8 @@ while True:
     line = line.rstrip()
     if line == '.':
         break
-    sockfd.send(line)
+    sockfd.send(line.encode('utf-8'))
     line = sockfd.recv(8192)
-    print("%s: got %s" % ( me, line ))
+    print("%s: got %s" % ( me, line.decode('utf-8') ))
     line = sys.stdin.readline()
 print("%s: User signals end of input, exit" % (me))

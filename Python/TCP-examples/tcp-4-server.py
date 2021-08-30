@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 ##
 ## Corresponds to tcp-4-server.c. I omit tcp-3-server.py.
 ## Pair this with tcp-2-client
@@ -9,8 +9,9 @@ import sys,os
 
 ##
 ## Sample TCP server - receive message, return it to client
-## Fork for each connectin client. Only different with tcp-2-server
-## is use of fork in main code.
+## Fork for each connectin client. The only difference with tcp-2-server
+## is use of fork in main code which allows the server to handle
+## multiple clients simultaneously, although in different processes.
 ##
 
 if len(sys.argv) < 3:

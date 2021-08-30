@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 ##
 ## Corresponds to tcp-1-client.c
 ##
@@ -38,6 +38,6 @@ while True:
     line = line.rstrip()
     if line == '.':
         break
-    sockfd.send(line)
+    sockfd.send(line.encode('utf-8'))
     line = sys.stdin.readline()
 print("%s: User signals end of input, exit" % (me))
