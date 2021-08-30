@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 ##
 ## Corresponds to udp-3-client.c
 ##
@@ -26,10 +26,10 @@ sockfd = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sendAddress = (network, int(port))
 
 line = sys.stdin.readline()
-while line != '':
+while len(line):
     line = line.rstrip()
-    sockfd.sendto(line, sendAddress)
-    line, addr = sockfd.recvfrom(8192)    
-    print("Client received from %s (port %d): %s" % (addr[0], addr[1], line))
+    sockfd.sendto(line.encode('utf-8'), sendAddress)
+    line, addr = sockfd.recvfrom(8192)
+    print(f"Server received from {addr[0]} port {addr[1]}: {line.decode('utf-8').rstrip()}")
     line = sys.stdin.readline()
 print("Done")

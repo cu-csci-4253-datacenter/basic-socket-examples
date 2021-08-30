@@ -3,6 +3,21 @@ import socket
 import sys,os
 import random
 
+##
+## Sample UDP relay agent that optionall drops packets and/or re-orders packets.
+##
+## usage:
+##
+## udp-relay in-port out-addr out-port [ drop probability ]
+##
+## Any message sent to the relay port that IS NOT from the out-addr/out-port is
+## then sent to out-addr/out-port.
+##
+## Any message sent to the relay in-port that IS from the out-addr/out-port is
+## then forwarded to the last addr/port that forwarded a relayed packet.
+##
+##
+
 if len(sys.argv) < 5:
     print("usage:", sys.argv[0], "<relayport> <svrIP> <svrPort> <dropProb>")
     sys.exit(1)
@@ -25,7 +40,7 @@ clientAddr = None
 while True:
     print("Prepare to read")
     data,fromAddr = fromClient.recvfrom(1024)
-    print("got ", data, "from ", fromAddr)
+    print(f"got {data} from {fromAddr}")
     if clientAddr == None or fromAddr != serverAddr:
         print("Pick new client addr")
         clientAddr = fromAddr

@@ -36,11 +36,11 @@ sockfd.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, bufsize)
 sockfd.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, bufsize)
 
 line = sys.stdin.readline()
-while line != '':
+while len(line) > 0:
     line = line.rstrip()
-    sockfd.send(line)
+    sockfd.send(line.encode('utf-8'))
     line = sockfd.recv(8192)
     addr = sockfd.getpeername()
-    print("Client received from %s (port %d): %s" % (addr[0], addr[1], line))
+    print(f"Server received from {addr[0]} port {addr[1]}: {line.decode('utf-8').rstrip()}")
     line = sys.stdin.readline()
 print("Done")

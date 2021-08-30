@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 ##
 ## Corresponds to udp-2-client.c
 ##
@@ -26,7 +26,7 @@ sockfd = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sendAddress = (network, int(port))
 
 line = sys.stdin.readline()
-while line != '':
-    sockfd.sendto(line, sendAddress)
+while len(line) != 0:
+    sockfd.sendto(line.encode('utf-8'), sendAddress)
     line = sys.stdin.readline()
 print("Done")

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 ##
 ## Corresponds to udp-2-server.c
 ##
@@ -26,6 +26,6 @@ sendAddress = (network, int(port))
 sockfd.bind(sendAddress)
 
 while True:
-    line, clientAddress = sockfd.recvfrom(8192)
-    print("Server received from %s (port %d): %s" % (clientAddress[0], clientAddress[1], line))
+    line, addr = sockfd.recvfrom(8192)
+    print(f"Server received from {addr[0]} port {addr[1]}: {line.decode('utf-8').rstrip()}")
 print("Done")

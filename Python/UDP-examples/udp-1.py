@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 ##
 ## Corresponds to udp-1.c in C files.
 ## Not really needed in practice in Python since socket
