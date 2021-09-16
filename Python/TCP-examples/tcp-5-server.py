@@ -43,7 +43,7 @@ listenfd.listen(100)
 ##
 readList = [ listenfd ]
 while True:
-    print("%s: wait for select" % ( me ))
+    print(f"{me}: wait for select")
     ##
     ## Select takes 3 lists of sockets - the read, write & other lists.
     ## The process will pause until it's possible to read, write or
@@ -58,7 +58,7 @@ while True:
     for fd in rfd:
         if fd == listenfd:
             ## Listen to a new connection?
-            print("%s: Listen for connection" % ( me ))
+            print(f"{me}: Listen for connection")
             acceptfd, theirAddr = listenfd.accept()
             print_socket_endpoints("listen", acceptfd)            
             readList.append( acceptfd )
@@ -70,5 +70,5 @@ while True:
                 fd.close()
                 readList.remove( fd )
             else:
-                print("%s: received %s" % (me, line.decode('utf-8')))
+                print(f"{me}: received {line.decode('utf-8')}")
                 fd.send(line)

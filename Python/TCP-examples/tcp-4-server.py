@@ -35,10 +35,10 @@ def print_socket_endpoints(name, sockfd):
 def handle_client(sockfd):
     while True:
         line = sockfd.recv(8192)
-        if line == '':
+        if len(line) == 0:
             print("End of input, exit")
-            break
-        print("%s: received %s" % (me, line))
+            return
+        print(f"{me}: received {line.decode('utf-8')}")
         # Send it back to client
         sockfd.send(line)
     
